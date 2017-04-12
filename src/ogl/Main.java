@@ -3,7 +3,6 @@ package ogl;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -22,7 +21,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		//Initialize parser with the filepath
-		Main parser = new Main("\\AT01_Paths_D.txt");
+		Main parser = new Main("JP02_Paths_D.txt");
 		
 		//Run parser
 		parser.processLineByLine();
@@ -36,17 +35,24 @@ public class Main {
         fillDistanceMatrix();
         fillNormalizedDistanceMatrix();
         check.clear();
-        O_ALGORITMO();
+        groupDetection();
         dAuxStructSorting();
         navigateMap();
+        groupMap.clear();
+        stopDetection();
+        dAuxStructSortingStop();
+        navigateMapStop();
+        outputHeader();
         //System.out.println(output);
         BufferedWriter writer = null;
         try
         {
             writer = new BufferedWriter( new FileWriter( "output.txt"));
+            writer.write(header);
             writer.write("----------------------------------------------------GRUPOS ENCONTRADOS----------------------------------------------------\n");
             writer.write( output);
-            writer.write("--------------------------------------------------------------------------------------------------------------------------\n");
+            writer.write("---------------------------------------------------PARADAS ENCONTRADAS----------------------------------------------------\n\n");
+            writer.write(stopOutput);
 
         }
         catch ( IOException e)
@@ -64,8 +70,7 @@ public class Main {
             }
         }
         
-        OpenGLInstance game = new OpenGLInstance(cleanMatrix, minX, maxX, minY, maxY, personCounter, frameCounter);
-        //game.play();
+        //OpenGLInstance game = new OpenGLInstance(cleanMatrix, minX, maxX, minY, maxY, personCounter, frameCounter);
 	}
 	
 	//Constructor method
@@ -161,6 +166,18 @@ public class Main {
     	}
     }
     
+    public static double calculateDistanceNormalizedStop(int q, int y){
+    	if(matrix[q][y].getX()==0 || matrix[q][y].getY()==0){
+    		return 0.0;
+    	}else{
+            double x1 = normalizeX((double) matrix[q][y].getX());
+            double y1 = normalizeY((double) matrix[q][y].getY());
+            double x2 = normalizeX((double) matrix[q][y+10].getX());
+            double y2 = normalizeY((double) matrix[q][y+10].getY());
+            return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+    	}
+    }
+    
     public static double normalizeX(double value){
     	return (((double)value - (double) minX)/((double) maxX - (double) minX));
     }
@@ -169,7 +186,7 @@ public class Main {
     	return (((double)value - (double) minY)/((double) maxY - (double) minY));
     }
     
-    public static void O_ALGORITMO(){
+    public static void groupDetection(){
         for(int q = 0; q<personCounter; q++){
             for(int w = 0; w<frameCounter; w++){
                 for(int e = 0; e<personCounter; e++){
@@ -193,7 +210,6 @@ public class Main {
     	for(DistanceAuxStruct i : distanceAuxList){
     		addGroup(i.getPerson1(), i.getPerson2(),i.getFrame());
     	}
-    	
     }
     
     public static void addGroup(int p1, int p2, int frame){
@@ -220,12 +236,49 @@ public class Main {
     		}
     	}
     }
-    /*
-    public static boolean addGroup(Group value){
-    	if(value.getPerson1())
-    	
-    	return false;
-    }*/
+    
+    public static void stopDetection(){
+    	distanceAuxList.clear();
+        for(int q = 0; q<personCounter; q++){
+            for(int w = 0; w<frameCounter; w++){
+            	if(w+10<frameCounter){
+            		if(calculateDistanceNormalizedStop(q, w)<=stopRange){
+            			distanceAuxList.add(new DistanceAuxStruct(q, w+10, q));
+            		}
+            	}
+            }
+        }
+    }
+    
+    public static void addStop(int p1, int frame){
+    	if(groupMap.containsKey(p1+"-"+p1)){
+    		Group aux = (Group) groupMap.get(p1+"-"+p1);
+    		if(aux.getMinFrame()>frame) aux.setMinFrame(frame);
+    		if(aux.getMaxFrame()<frame) aux.setMaxFrame(frame);
+    		groupMap.put(p1+"-"+p1, aux);
+    		
+    	}else{
+    		groupMap.put(p1+"-"+p1, new Group(p1, p1, frame, frame));
+    	}
+    }
+    
+    public static void navigateMapStop(){
+    	Set set = groupMap.entrySet();
+    	Iterator i = set.iterator();
+    	while(i.hasNext()){
+    		Map.Entry me = (Map.Entry)i.next();
+    		Group aux = (Group) groupMap.get(me.getKey());
+    		if((aux.getMaxFrame()-aux.getMinFrame()) >= 60){
+    			stopOutput+="Pessoa " + aux.getPerson1() + " parou de andar. \nFrame inicial: " + (aux.getMinFrame()-10)+ "\nFrame final: "+aux.getMaxFrame() + "\n\n";
+    		}
+    	}
+    }
+    
+    public static void dAuxStructSortingStop(){
+    	for(DistanceAuxStruct i : distanceAuxList){
+    		addStop(i.getPerson1(),i.getFrame());
+    	}
+    }
     
     //Parsing functions
     public final void processLineByLine() throws IOException {
@@ -288,6 +341,13 @@ public class Main {
             System.out.println();
         }
     }
+    
+    public static void outputHeader(){
+    	header+="-------------------------------------------------ANALYSIS REPORT----------------------------------------------------------\n\n";
+        header+="Total de pessoas analisadas: " + personCounter + "\n\n";
+        header+="Total de frames do vídeo analisado: " + frameCounter + "\n\n";
+    }
+    
 	
 	//Var declarations
     private static Coordinate matrix[][] = new Coordinate[200][600];
@@ -297,6 +357,7 @@ public class Main {
     //private static List<Group> groupList = new ArrayList<>();
     private static HashMap groupMap = new HashMap();
     private static final double groupRange = 0.07;
+    private static final double stopRange  = 0.00005;
     private static int personCounter = 0, frameCounter = 0;
     private static List<Coordinate> check = new ArrayList<>();
     private static int minX = 5000, maxX = 0, minY = 5000, maxY = 0;
@@ -304,6 +365,8 @@ public class Main {
     private final Path fFilePath;
     private final static Charset ENCODING = StandardCharsets.UTF_8;
     private static String output = "";
+    private static String header = "";
+    private static String stopOutput = "";
     
 
 }
