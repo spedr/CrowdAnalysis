@@ -1,0 +1,33 @@
+-------------------------------------------------ANALYSIS REPORT----------------------------------------------------------
+
+Total de pessoas analisadas: 23
+
+Total de frames do vídeo analisado: 99
+
+----------------------------------------------------GRUPOS ENCONTRADOS----------------------------------------------------
+Pessoa 6 e pessoa 7
+Frame inicial: 1
+Frame final: 98
+
+Pessoa 17 e pessoa 18
+Frame inicial: 3
+Frame final: 83
+
+Pessoa 15 e pessoa 16
+Frame inicial: 4
+Frame final: 81
+
+Pessoa 9 e pessoa 10
+Frame inicial: 1
+Frame final: 98
+
+Pessoa 20 e pessoa 21
+Frame inicial: 1
+Frame final: 98
+
+Pessoa 4 e pessoa 5
+Frame inicial: 1
+Frame final: 98
+
+---------------------------------------------------PARADAS ENCONTRADAS----------------------------------------------------
+

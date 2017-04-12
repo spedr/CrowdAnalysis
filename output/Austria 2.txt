@@ -1,0 +1,93 @@
+-------------------------------------------------ANALYSIS REPORT----------------------------------------------------------
+
+Total de pessoas analisadas: 18
+
+Total de frames do vídeo analisado: 645
+
+----------------------------------------------------GRUPOS ENCONTRADOS----------------------------------------------------
+Pessoa 7 e pessoa 8
+Frame inicial: 9
+Frame final: 80
+
+Pessoa 8 e pessoa 9
+Frame inicial: 1
+Frame final: 80
+
+Pessoa 10 e pessoa 16
+Frame inicial: 1
+Frame final: 206
+
+---------------------------------------------------PARADAS ENCONTRADAS----------------------------------------------------
+
+Pessoa 7 parou de andar. 
+Frame inicial: 158
+Frame final: 644
+
+Pessoa 17 parou de andar. 
+Frame inicial: 165
+Frame final: 644
+
+Pessoa 8 parou de andar. 
+Frame inicial: 81
+Frame final: 644
+
+Pessoa 10 parou de andar. 
+Frame inicial: 416
+Frame final: 644
+
+Pessoa 11 parou de andar. 
+Frame inicial: 82
+Frame final: 644
+
+Pessoa 12 parou de andar. 
+Frame inicial: 509
+Frame final: 644
+
+Pessoa 9 parou de andar. 
+Frame inicial: 90
+Frame final: 644
+
+Pessoa 15 parou de andar. 
+Frame inicial: 70
+Frame final: 644
+
+Pessoa 16 parou de andar. 
+Frame inicial: 207
+Frame final: 644
+
+Pessoa 13 parou de andar. 
+Frame inicial: 509
+Frame final: 644
+
+Pessoa 14 parou de andar. 
+Frame inicial: 66
+Frame final: 644
+
+Pessoa 0 parou de andar. 
+Frame inicial: 82
+Frame final: 644
+
+Pessoa 1 parou de andar. 
+Frame inicial: 88
+Frame final: 644
+
+Pessoa 2 parou de andar. 
+Frame inicial: 209
+Frame final: 644
+
+Pessoa 3 parou de andar. 
+Frame inicial: 179
+Frame final: 644
+
+Pessoa 4 parou de andar. 
+Frame inicial: 486
+Frame final: 618
+
+Pessoa 5 parou de andar. 
+Frame inicial: 474
+Frame final: 603
+
+Pessoa 6 parou de andar. 
+Frame inicial: 276
+Frame final: 644
+

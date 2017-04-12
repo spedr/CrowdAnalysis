@@ -21,7 +21,11 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		//Initialize parser with the filepath
-		Main parser = new Main("JP02_Paths_D.txt");
+//	Main parser = new Main("JP1.txt");
+//		Main parser = new Main("JP2.txt");
+//	Main parser = new Main("austria (1).txt");
+		Main parser = new Main("austria(2).txt");
+		
 		
 		//Run parser
 		parser.processLineByLine();
@@ -32,7 +36,7 @@ public class Main {
         normalizedDistanceMatrix = new double[personCounter][frameCounter][personCounter];
         cleanDMatrix();
         cleanMatrix(cleanMatrix);
-        fillDistanceMatrix();
+       // fillDistanceMatrix();
         fillNormalizedDistanceMatrix();
         check.clear();
         groupDetection();
@@ -70,7 +74,7 @@ public class Main {
             }
         }
         
-        //OpenGLInstance game = new OpenGLInstance(cleanMatrix, minX, maxX, minY, maxY, personCounter, frameCounter);
+        OpenGLInstance game = new OpenGLInstance(cleanMatrix, minX, maxX, minY, maxY, personCounter, frameCounter);
 	}
 	
 	//Constructor method
@@ -118,18 +122,18 @@ public class Main {
         return false;
     }
     
-    public static void fillDistanceMatrix(){
-        for(int q = 0; q<personCounter; q++){
-            for(int w = 0; w<frameCounter; w++){
-                for(int e = 0; e<personCounter; e++){
-                    if(!skipDoubles(q, e)){
-                        check.add(new Coordinate(q, e));
-                    }
-                    distanceMatrix[q][w][e] = calculateDistancev2(q, e, w);
-                }
-            }
-        }
-    }
+//    public static void fillDistanceMatrix(){
+//        for(int q = 0; q<personCounter; q++){
+//            for(int w = 0; w<frameCounter; w++){
+//                for(int e = 0; e<personCounter; e++){
+//                    if(!skipDoubles(q, e)){
+//                        check.add(new Coordinate(q, e));
+//                    }
+//                    distanceMatrix[q][w][e] = calculateDistancev2(q, e, w);
+//                }
+//            }
+//        }
+//    }
     
     public static void fillNormalizedDistanceMatrix(){
         for(int q = 0; q<personCounter; q++){
@@ -146,13 +150,13 @@ public class Main {
     }
     
     //Aux functions
-    public static double calculateDistancev2(int q, int e, int y){
-        double x1 = (double) matrix[q][y].getX();
-        double y1 = (double) matrix[q][y].getY();
-        double x2 = (double) matrix[e][y].getX();
-        double y2 = (double) matrix[e][y].getY();
-        return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
-    }
+//    public static double calculateDistancev2(int q, int e, int y){
+//        double x1 = (double) matrix[q][y].getX();
+//        double y1 = (double) matrix[q][y].getY();
+//        double x2 = (double) matrix[e][y].getX();
+//        double y2 = (double) matrix[e][y].getY();
+//        return Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+//    }
     
     public static double calculateDistanceNormalized(int q, int e, int y){
     	if(matrix[q][y].getX()==0 || matrix[q][y].getY()==0){
@@ -350,7 +354,7 @@ public class Main {
     
 	
 	//Var declarations
-    private static Coordinate matrix[][] = new Coordinate[200][600];
+    private static Coordinate matrix[][] = new Coordinate[200][650];
     private static double distanceMatrix[][][]; //= new double[100][100][100];
     private static double normalizedDistanceMatrix[][][];
     private static List<DistanceAuxStruct> distanceAuxList = new ArrayList<>();

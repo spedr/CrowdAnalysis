@@ -1,0 +1,69 @@
+-------------------------------------------------ANALYSIS REPORT----------------------------------------------------------
+
+Total de pessoas analisadas: 28
+
+Total de frames do vídeo analisado: 100
+
+----------------------------------------------------GRUPOS ENCONTRADOS----------------------------------------------------
+Pessoa 13 e pessoa 14
+Frame inicial: 1
+Frame final: 98
+
+Pessoa 16 e pessoa 17
+Frame inicial: 1
+Frame final: 98
+
+Pessoa 12 e pessoa 13
+Frame inicial: 13
+Frame final: 83
+
+Pessoa 7 e pessoa 11
+Frame inicial: 1
+Frame final: 98
+
+Pessoa 0 e pessoa 27
+Frame inicial: 1
+Frame final: 74
+
+Pessoa 1 e pessoa 2
+Frame inicial: 1
+Frame final: 98
+
+Pessoa 25 e pessoa 26
+Frame inicial: 1
+Frame final: 99
+
+Pessoa 3 e pessoa 4
+Frame inicial: 1
+Frame final: 98
+
+Pessoa 4 e pessoa 5
+Frame inicial: 1
+Frame final: 98
+
+Pessoa 5 e pessoa 6
+Frame inicial: 1
+Frame final: 98
+
+---------------------------------------------------PARADAS ENCONTRADAS----------------------------------------------------
+
+Pessoa 7 parou de andar. 
+Frame inicial: 12
+Frame final: 84
+
+Pessoa 10 parou de andar. 
+Frame inicial: 8
+Frame final: 89
+
+Pessoa 11 parou de andar. 
+Frame inicial: 0
+Frame final: 92
+
+Pessoa 12 parou de andar. 
+Frame inicial: 0
+Frame final: 98
+
+Pessoa 22 parou de andar. 
+Frame inicial: 14
+Frame final: 99
+

@@ -1,0 +1,41 @@
+-------------------------------------------------ANALYSIS REPORT----------------------------------------------------------
+
+Total de pessoas analisadas: 12
+
+Total de frames do vídeo analisado: 400
+
+----------------------------------------------------GRUPOS ENCONTRADOS----------------------------------------------------
+Pessoa 7 e pessoa 8
+Frame inicial: 1
+Frame final: 319
+
+Pessoa 0 e pessoa 9
+Frame inicial: 1
+Frame final: 170
+
+---------------------------------------------------PARADAS ENCONTRADAS----------------------------------------------------
+
+Pessoa 8 parou de andar. 
+Frame inicial: 202
+Frame final: 399
+
+Pessoa 10 parou de andar. 
+Frame inicial: 50
+Frame final: 399
+
+Pessoa 11 parou de andar. 
+Frame inicial: 45
+Frame final: 399
+
+Pessoa 9 parou de andar. 
+Frame inicial: 219
+Frame final: 399
+
+Pessoa 3 parou de andar. 
+Frame inicial: 208
+Frame final: 399
+
+Pessoa 4 parou de andar. 
+Frame inicial: 203
+Frame final: 399
+
