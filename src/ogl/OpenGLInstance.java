@@ -55,9 +55,23 @@ public class OpenGLInstance extends JFrame implements GLEventListener {
     	double x;
     	double y;
     	
+        gl.glClear(GL2.GL_COLOR_BUFFER_BIT);
+        gl.glColor3f(0.0f,0.0f,1.0f);
+        gl.glLineWidth(30);
+
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_LINE);
+
+        gl.glBegin(GL2.GL_POLYGON);
+            gl.glVertex2d(0.536,0.536);
+            gl.glVertex2d(0.536,-0.536);
+            gl.glVertex2d(-0.536,-0.536);
+            gl.glVertex2d(-0.536,0.536);
+        gl.glEnd();
+
+        gl.glPolygonMode(GL2.GL_FRONT_AND_BACK, GL2.GL_FILL);
+    	double color = 100/frameCounter;
     	gl.glBegin(GL2.GL_POINTS);
     		for(int i = 0; i<personCounter;i++){
-    			
     			for(int j = 0; j<frameCounter; j++){
     				if(matrix[i][j].getX() !=0 && matrix[i][j].getY()!=0){
         				x = (((double)matrix[i][j].getX() - (double) minX)/((double) maxX - (double) minX));
@@ -65,7 +79,7 @@ public class OpenGLInstance extends JFrame implements GLEventListener {
         				x = x -0.5;
         				y = y-0.5;
         				gl.glPointSize(2);
-        				gl.glColor3d(1f-(0.005*j), 1f-(0.005*j), 0f);
+        				gl.glColor3d(1f-((0.005*j)), 1f-((0.005*j)), 0f);
         				gl.glVertex2d(x, y);
     				}	 
     			}
