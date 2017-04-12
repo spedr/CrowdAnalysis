@@ -1,6 +1,9 @@
 package ogl;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -19,7 +22,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		//Initialize parser with the filepath
-		Main parser = new Main("\\Paths_D.txt");
+		Main parser = new Main("\\AT01_Paths_D.txt");
 		
 		//Run parser
 		parser.processLineByLine();
@@ -32,14 +35,36 @@ public class Main {
         cleanMatrix(cleanMatrix);
         fillDistanceMatrix();
         fillNormalizedDistanceMatrix();
+        check.clear();
         O_ALGORITMO();
         dAuxStructSorting();
         navigateMap();
-        System.out.println(output);
-        System.out.println(normalizedDistanceMatrix[9][0][10]);
-        System.out.println(normalizedDistanceMatrix[9][40][10]); //0.067022775546908
+        //System.out.println(output);
+        BufferedWriter writer = null;
+        try
+        {
+            writer = new BufferedWriter( new FileWriter( "output.txt"));
+            writer.write("----------------------------------------------------GRUPOS ENCONTRADOS----------------------------------------------------\n");
+            writer.write( output);
+            writer.write("--------------------------------------------------------------------------------------------------------------------------\n");
+
+        }
+        catch ( IOException e)
+        {
+        }
+        finally
+        {
+            try
+            {
+                if ( writer != null)
+                writer.close( );
+            }
+            catch ( IOException e)
+            {
+            }
+        }
         
-        //OpenGLInstance game = new OpenGLInstance(cleanMatrix, minX, maxX, minY, maxY, personCounter, frameCounter);
+        OpenGLInstance game = new OpenGLInstance(cleanMatrix, minX, maxX, minY, maxY, personCounter, frameCounter);
         //game.play();
 	}
 	
@@ -73,6 +98,15 @@ public class Main {
     public static boolean skipDoubles(int x, int y){
         for(Coordinate i : check){
             if ((i.getX() == x && i.getY() == y) || (i.getX() == y && i.getY() == x)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean skipDoubles2(int x, int y){
+        for(Coordinate i : check){
+            if ((i.getX() == y && i.getY() == x)){
                 return true;
             }
         }
@@ -139,14 +173,16 @@ public class Main {
         for(int q = 0; q<personCounter; q++){
             for(int w = 0; w<frameCounter; w++){
                 for(int e = 0; e<personCounter; e++){
-                	if(!skipDoubles(q,e)){
-                		//DO NOTHING
-                	}else if(q==e || normalizedDistanceMatrix[q][w][e]==0.0){
+                    if(skipDoubles2(q, e)){
+                    	//DO NOTHING
+                        
+                    }else if(q==e || normalizedDistanceMatrix[q][w][e]==0.0){
                 		//DO NOTHING
                 	}else if(normalizedDistanceMatrix[q][w][e] <= groupRange){
                 		//DO STUFF
                 		//output+="Pessoa " + q + " e pessoa " + e + " formaram um grupo na frame " + w +"\n";
                 		distanceAuxList.add(new DistanceAuxStruct(q, w, e));
+                		check.add(new Coordinate(q, e));
                 	}
                 }
             }
@@ -179,7 +215,9 @@ public class Main {
     	while(i.hasNext()){
     		Map.Entry me = (Map.Entry)i.next();
     		Group aux = (Group) groupMap.get(me.getKey());
-    		output+="Pessoa " + aux.getPerson1() + " e pessoa "+aux.getPerson2() + "\nFrame inicial: " + aux.getMinFrame()+ "\nFrame final: "+aux.getMaxFrame() + "\n";
+    		if((aux.getMaxFrame()-aux.getMinFrame()) >= 60){
+    			output+="Pessoa " + aux.getPerson1() + " e pessoa "+aux.getPerson2() + "\nFrame inicial: " + aux.getMinFrame()+ "\nFrame final: "+aux.getMaxFrame() + "\n\n";
+    		}
     	}
     }
     /*
